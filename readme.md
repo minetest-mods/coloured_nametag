@@ -9,10 +9,10 @@ The usage of this mod is very simple. Once it has been installed, players on the
 Just to warn you: This mod is totally and utterly useless in singleplayer! (Even with f7, the nametag isn't visible.)
 
 ####ToDo:
-Make the nametag colours preserve over reboot.
-Make the mod more customisable.
-Maybe make the formspec a little more colourful.
-Maybe make a second page of colours?
+* Make the nametag colours preserve over reboot.
+* Make the mod more customisable.
+* Maybe make the formspec a little more colourful.
+* Maybe make a second page of colours?
 
 ###License:
 Everything in this mod is licensed under WTFPL.
