@@ -90,6 +90,73 @@ minetest.register_chatcommand("nametag-custom", {
 	end
 })
 
+
+minetest.register_chatcommand("customcolor", {
+	params = "<Red Value> <Green Value> <Blue Value>",
+	description = "Change the Color of a nametage to a custom color (in RGB Format)",
+	func = function(user, param)
+		local found, _, redValue, greenValue, blueValue = param:find("^([^%s]+)%s+(.+)%s+(.+)$")
+		if not found then 
+			minetest.chat_send_player(player, "Not enough Arguments!") 
+			return 
+		end
+		local player = minetest.get_player_by_name(user)
+		player:set_nametag_attributes({
+				color = {r = redValue, g = greenValue, b = blueValue}
+			})
+	end
+})
+
+minetest.register_chatcommand("changecolor", {
+	params = "<New Color>",
+	description = "Change the Color of a nametag to a specific Color",
+	func = function(user, param)
+		local player = minetest.get_player_by_name(user)
+		param = param:lower()
+		if param == "" then
+			minetest.chat_send_player(player, "No Color Specified!")
+		elseif param == "green" then
+			player:set_nametag_attributes({
+				color = {r = 0, g = 255, b = 0}
+			})
+		elseif param == "blue" then
+			player:set_nametag_attributes({
+				color = {r = 0, g = 0, b = 255}
+			})
+		elseif param == "red" then
+			player:set_nametag_attributes({
+				color = {r = 255, g = 0, b = 0}
+			})
+		elseif param == "purple" then
+			player:set_nametag_attributes({
+				color = {r = 200, g = 0, b = 200}
+			})
+		elseif param == "yellow" then
+			player:set_nametag_attributes({
+				color = {r = 255, g = 255, b = 0}
+			})		
+		elseif param == "cyan" then
+			player:set_nametag_attributes({
+				color = {r = 0, g = 255, b = 255}
+			})	
+		elseif param == "white" then
+			player:set_nametag_attributes({
+				color = {r = 255, g = 255, b = 255}
+			})
+		elseif param == "orange" then
+			player:set_nametag_attributes({
+				color = {r = 255, g = 165, b = 0}
+			})
+		elseif param == "black" then
+			player:set_nametag_attributes({
+				color = {r = 0, g = 0, b = 0}
+			})
+		else
+			minetest.chat_send_player(user, "Incorrect Color!")
+		end
+	end
+})
+
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "name-colours" then return end
 	if fields.green then
