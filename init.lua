@@ -10,6 +10,12 @@ local colors = {
     black = {r = 0, g = 0, b = 0},
 }
 
+-- Register privilege to allow players to colour their nametag
+minetest.register_privilege("nametag", {
+	description = "Allows you to colour your nametag",
+	give_to_singleplayer = false,
+})
+
 -- Register command to allow players to colour their nametag
 minetest.register_chatcommand("nametag",{
 	params = "<color>",
