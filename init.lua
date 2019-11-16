@@ -25,7 +25,6 @@ minetest.register_chatcommand("nametag",{
 		local player = minetest.get_player_by_name(user)
 		param = param:lower()
 		if param == "" then
-			--minetest.chat_send_player(user, "Showing formspec...")
 			minetest.after(1, function()
 				minetest.show_formspec(user, "name-colours",
 					"size[8.5,4.5]"..
@@ -41,15 +40,14 @@ minetest.register_chatcommand("nametag",{
 					"button_exit[5.75,3.5;2.5,0.5;black;Black]"
 				)
 			end)
-	elseif colors[param] then
-		player:set_nametag_attributes({
+		elseif colors[param] then
+			player:set_nametag_attributes({
 			color = colors[param]
-})
+		})
+
 minetest.chat_send_player(user, "Your nametag color has been set to: " .. param)
-minetest.log("action", (user.. " changed their nametag color to: " .. param))
 	else
 		minetest.chat_send_player(user, "Invalid usage, see /help nametag")
-		minetest.log("action", (user .. " used invalid arguments to change their nametag color"))
 	end
 end
 })
@@ -63,7 +61,6 @@ minetest.register_chatcommand("custom-nametag", {
 		local found, _, redValue, greenValue, blueValue = param:find("^([^%s]+)%s+(.+)%s+(.+)$")
 		if not found then
 			minetest.chat_send_player(user, "Invalid usage, see /help custom-nametag")
-			minetest.log("action", (user .. " used invalid arguments to change their nametag color"))
 			return
 		end
 		local player = minetest.get_player_by_name(user)
@@ -71,23 +68,21 @@ minetest.register_chatcommand("custom-nametag", {
 			color = {r = redValue, g = greenValue, b = blueValue}
 		})
 		minetest.chat_send_player(user, "Your nametag color has been set to the value of: " ..redValue .. ", " .. greenValue .. ", " .. blueValue)
-		minetest.log("action", (user .. " changed their nametag color using RGB-format to: "..redValue .. ", " .. greenValue .. ", " .. blueValue))
 	end
 })
 
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "name-colours" then return end
-	for key, value in pairs(colors) do
-   	 if fields[key] then
-        	player:set_nametag_attributes({
-            	color = colors[key]
-        	})
-			minetest.log("action", ("A player changed their nametag color using the GUI"))
-      	end
+		for key, value in pairs(colors) do
+			if fields[key] then
+				player:set_nametag_attributes({
+            		color = colors[key]
+				})
+		end
    	end
 end)
 
 -- Log
 if minetest.settings:get_bool("log_mods") then
-	minetest.log("action", ("[MOD] Coloured-nametag loaded"))
+	minetest.log("action", ("[MOD] Coloured nametag loaded"))
 end
