@@ -10,17 +10,11 @@ local colors = {
 	black =  {r = 0,   g = 0,   b = 0},
 }
 
--- Register privilege to allow players to colour their nametag
-minetest.register_privilege("nametag", {
-	description = "Allows you to colour your nametag",
-	give_to_singleplayer = false,
-})
-
 -- Register command to allow players to colour their nametag
 minetest.register_chatcommand("nametag",{
 	params = "<color>",
 	description = "Allows players to colour their nametag. Type /nametag to see available colors",
-	privs = {nametag = true},
+	privs = {shout = true},
 	func = function(user, param)
 		param = param:lower()
 		if param == "" then
