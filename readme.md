@@ -57,5 +57,5 @@ Special thanks to Chanku/Sapein.
 * Maybe make a second page of colours?
 
 ## License:
-Copyright (C) Amaz1 2015-2016.   
+Copyright (C) Amaz1 2015-2016.
 See [`license.txt`](/license.txt) for more information.
